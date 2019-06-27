@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Añadir un Coche</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding class="form-content"> 
+    <form [formGroup]="carForm" (ngSubmit)="onSubmit(carForm.value)">
+      <ion-item>
+        <ion-label position="stacked">Modelo<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input formControlName="modelName" type="text"></ion-input>
+        <ion-item lines="none" 
+            *ngIf="carForm.get('modelName').hasError('required') && 
+                (carForm.get('modelName').dirty || carForm.get('modelName').touched)">
+          <ion-text color="danger" class="form-error">
+            <ion-icon name="information"></ion-icon>Modelo es necesário.
+          </ion-text>
+        </ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Registration Number<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input formControlName="registration" type="text"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Color<ion-text color="danger">*</ion-text></ion-label>
+        <ion-select  multiple="false" placeholder="Color" interface="popover">
+          <ion-select-option *ngFor="let color of colors" [value]="color">{{ color }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+          <ion-label>Category<ion-text color="danger">*</ion-text></ion-label>
+          <ion-select multiple="false" placeholder="Category" interface="action-sheet">
+            <ion-select-option *ngFor="let category of categories" [value]="category">{{ category }}</ion-select-option>
+          </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Combustible<ion-text color="danger">*</ion-text></ion-label>
+        <ion-select multiple="false" placeholder="Fuel Type">
+          <ion-select-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{ fuelType }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-range min="0" max="100" pin="true" snaps="true" step="25" ticks="true" value="0" color="primary">
+          <ion-icon name="remove" slot="start"></ion-icon>
+          <ion-icon name="add" slot="end"></ion-icon>
+        </ion-range>
+      <ion-button (click)="onSubmit()" expand='block'>
+        Confirmar
+      </ion-button>
+      <ion-button expand="block" (click)="dismiss()" color="danger">
+        Cancelar
+      </ion-button>    
+    </form>
+  </ion-content>

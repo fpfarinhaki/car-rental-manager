@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Coches
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-list padding>
+      <ion-card *ngFor="let car of cars">
+        <ion-card-header>        
+            <ion-card-subtitle>{{car.modelName}}</ion-card-subtitle>
+            <ion-card-title>{{car.registration}}</ion-card-title>
+        </ion-card-header>
+        <ion-img [src]="car.image"></ion-img>
+        <ion-card-content>
+            <p><b>Color:&nbsp;</b>{{car.color}}</p>
+            <p><b>Combust.:&nbsp;</b>{{car.fuelType}}</p>
+        </ion-card-content>                  
+      </ion-card>  
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button vertical (click)="addCar()" size="small">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+</ion-content>
