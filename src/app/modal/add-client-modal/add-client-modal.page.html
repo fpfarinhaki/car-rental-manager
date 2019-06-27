@@ -5,34 +5,16 @@
   </ion-header>
   
   <ion-content padding class="form-content"> 
-    <form [formGroup]="clientForm" (ngSubmit)="onSubmit(clientForm.value)">
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
       <ion-item>
-        <ion-label position="stacked">Nombre <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input formControlName="name" type="text" required></ion-input>
-        <ion-item lines="none" *ngIf="clientForm.get('name').hasError('required') && 
-                                          (clientForm.get('name').dirty || clientForm.get('name').touched)">
-          <ion-text color="danger" class="form-error">
-            <ion-icon name="information-circle-outline"></ion-icon>Nombre es necesario.
-          </ion-text>
-        </ion-item>
+        <ion-label position="stacked">Nombre Completo<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Primero Apelido</ion-label>
-        <ion-input formControlName="surname_1" type="text" class="form-controll" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Segundo Apelido</ion-label>
-        <ion-input formControlName="surname_2" type="text" class="form-controll"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Pagamento</ion-label>
-        <ion-select formControlName="payment" placeholder="Seleciona el Pagamento">
-          <ion-select-option value="CARD">Tarjeta</ion-select-option>
-          <ion-select-option value="CASH">Dinero</ion-select-option>
-          <ion-select-option value="CHECK">Cheque</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-button (click)="onSubmit()" expand='block'>
+      <ion-text color="danger" *ngIf="clientForm.get('name').hasError('required') && 
+          (clientForm.get('name').dirty || clientForm.get('name').touched)">
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>Es necesário el nombre completo del cliente.
+        </ion-text>
+      <ion-button type="submit" (click)="onSubmit()" expand='block' [disabled]="!clientForm.valid">
         Confirmar
       </ion-button>
       <ion-button expand="block" (click)="dismiss()" color="danger">
