@@ -8,13 +8,13 @@
     <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="stacked">Nombre Completo<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input formControlName="name" type="text"></ion-input>
+        <ion-input formControlName="name" type="text" required></ion-input>
       </ion-item>
       <ion-text color="danger" *ngIf="clientForm.get('name').hasError('required') && 
           (clientForm.get('name').dirty || clientForm.get('name').touched)">
           <ion-icon name="information-circle-outline" slot="start"></ion-icon>Es necesário el nombre completo del cliente.
         </ion-text>
-      <ion-button type="submit" (click)="onSubmit()" expand='block' [disabled]="!clientForm.valid">
+      <ion-button type="submit" (click)="onSubmit()" expand='block' [disabled]="clientForm.invalid">
         Confirmar
       </ion-button>
       <ion-button expand="block" (click)="dismiss()" color="danger">

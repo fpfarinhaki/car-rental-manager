@@ -22,18 +22,17 @@ export class AddClientModalPage implements OnInit {
     this.clientForm.statusChanges
       .subscribe((event) => {
         console.log(event);
+        console.log(this.clientForm);
       });
   }
 
   ngOnInit() {
     this.clientForm = this.formBuilder.group({
-      name : new FormControl('', {updateOn: 'change', validators: Validators.required}),
-      surname_1: new FormControl('', Validators.required),
-      surname_2: new FormControl(''),
-      payment: new FormControl('Seleciona el pagamento', Validators.required)
-    });
+      name : new FormControl('', Validators.required)
+    }, {updateOn: 'change'});
 
     this.onFormStatusChange();
+    console.log(this.clientForm.errors);
   }
 
   onSubmit() {
