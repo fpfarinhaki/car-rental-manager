@@ -1,24 +1,66 @@
 <ion-header>
     <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
       <ion-title>Añadir un Cliente</ion-title>
     </ion-toolbar>
   </ion-header>
   
-  <ion-content padding class="form-content"> 
-    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-      <ion-item>
-        <ion-label position="stacked">Nombre Completo<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input formControlName="name" type="text" required></ion-input>
-      </ion-item>
-      <ion-text color="danger" *ngIf="clientForm.get('name').hasError('required') && 
-          (clientForm.get('name').dirty || clientForm.get('name').touched)">
-          <ion-icon name="information-circle-outline" slot="start"></ion-icon>Es necesário el nombre completo del cliente.
-        </ion-text>
-      <ion-button type="submit" (click)="onSubmit()" expand='block' [disabled]="clientForm.invalid">
-        Confirmar
-      </ion-button>
-      <ion-button expand="block" (click)="dismiss()" color="danger">
-        Cancelar
-      </ion-button>    
-    </form>
-  </ion-content>
+  <ion-content> 
+    <ion-card>
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="inset">
+            <ion-label position="floating" color="medium">Nombre Completo<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+          </ion-item>
+          <ion-item lines="inset"> 
+            <ion-label position="floating" color="medium">Numero Documento<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="idNumber" type="text"></ion-input>  
+          </ion-item>
+          <ion-item lines="none" class="segment-item">
+            <ion-segment (ionChange)="segmentChanged($event)" color="primary" class="ion-no-padding">
+              <ion-segment-button layout="icon-top">
+                <ion-icon name="card"></ion-icon>
+                  DNI
+              </ion-segment-button>
+              <ion-segment-button layout="icon-top">
+                  <ion-icon name="journal"></ion-icon>
+                  Passaporte  
+              </ion-segment-button>
+              <ion-segment-button layout="icon-top">
+                <ion-icon name="bookmarks"></ion-icon>
+                Otro
+              </ion-segment-button>
+            </ion-segment>
+          </ion-item>
+          <ion-button type="submit" (click)="onSubmit()" [disabled]="clientForm.invalid" expand="block">
+            Proximo
+          </ion-button>
+          <ion-button (click)="dismiss()" color="danger" expand="block">
+            Cancelar
+          </ion-button>
+        </form> 
+    </ion-card>
+    
+          <!-- <ion-item lines="none">
+            <ion-label position="floating" color="medium">Fone</ion-label>
+            <ion-input formControlName="phone" type="tel" placeholder="ex.(34)555-672-567"></ion-input>  
+          </ion-item> 
+          <ion-item>
+            <ion-label position="floating" color="medium">Ubicacion</ion-label>
+            <ion-input formControlName="address" type="text"></ion-input>  
+          </ion-item>
+          <ion-label position="fixed" color="medium">Tipo Documento</ion-label>
+          
+          <ion-label position="inline" slot="start" color="medium">Fecha Validad</ion-label>
+          <ion-datetime formControlName="idExpirationDate" display-format="DD.MM.YYYY" 
+            placeholder="Seleciona Fecha" class="ion-no-padding" slot="end"></ion-datetime>
+          <ion-label position="inline" color="medium">País<ion-text color="danger">*</ion-text></ion-label>
+          <ion-select formControlName="country" placeholder="Seleciona País">
+            <ion-select-option *ngFor="let country of countries" [value]="country">{{country}}</ion-select-option>
+          </ion-select> -->
+
+ </ion-content>

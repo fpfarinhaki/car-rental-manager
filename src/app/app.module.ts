@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddClientModalPageModule } from './modal/add-client-modal/add-client-modal.module';
 import { AddCarModalPageModule } from './modal/add-car-modal/add-car-modal.module';
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AddCarModalPageModule } from './modal/add-car-modal/add-car-modal.modul
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule, FormsModule, 
-    AddClientModalPageModule, AddCarModalPageModule
+    AddClientModalPageModule, AddCarModalPageModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
