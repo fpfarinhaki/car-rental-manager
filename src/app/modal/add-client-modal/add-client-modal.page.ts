@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, AbstractControlOptions, FormBuilder } from '@angular/forms';
-import { Client, ClientService } from 'src/app/services/client.service';
+import { ClientService } from 'src/app/services/client.service';
 import { CountryService } from 'src/app/services/country.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-client-modal',
@@ -11,41 +10,32 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-client-modal.page.scss'],
 })
 export class AddClientModalPage implements OnInit {
- 
+  countries = [];
+  clients = [];
 
   clientForm: FormGroup;
-  selectedCountry = 'País';
-  countries: {}
 
   constructor(private modalController: ModalController,
               private clientService: ClientService,
               private formBuilder: FormBuilder, 
-              private countryService: CountryService) {
-                 
+              private countryService: CountryService) {           
   }
 
   ngOnInit() {
     this.clientForm = this.formBuilder.group({
       name : new FormControl('', Validators.required),
       idNumber: new FormControl('', Validators.required),
-      idType: new FormControl(''),
-      idExpirationDate: new FormControl('', Validators.required),
-      country: new FormControl('', Validators.required),
-      address: new FormControl(''),
-      phone: new FormControl('')
+      country: new FormControl('', Validators.required)
     }, {updateOn: 'change'});
-    this.countryService.getCountries()
-      .subscribe((countries: any[]) => {
-        this.countries = countries.map(country => country['name']);
-      });      
+    console.log(this.clientForm.value);
   }
 
   onSubmit() {
     console.log(this.clientForm.value);
     const value = this.clientForm.value;
-    const client = new Client(value.name, value.payment);
-    console.log(client);
-    this.clientService.addClient(client);
+    // const client: Client = {};
+    // console.log(client);
+    // this.clientService.addClient(client);
     this.modalController.dismiss();
   }
 
@@ -59,5 +49,43 @@ export class AddClientModalPage implements OnInit {
     console.log("Change camera icon to Checked Icon");
   }
 
+  searchCountry(event) {
+    // console.log(event.srcElement.value);
+    if (event.srcElement.value == '') {
+      this.countries = [];
+    } else {
+      if (event.srcElement.value.length > 1) {
+        this.countryService.getResults(event.srcElement.value)
+          .subscribe(result => this.countries = result);
+      }
+    }
+    console.log(this.countries);
+  }
 
+  searchClient(event) {
+    // console.log(event.srcElement.value);
+    if (event.srcElement.value == '') {
+      this.clients = [];
+    } else {
+      if (event.srcElement.value.length > 1) {
+        this.clientService.getClients(event.srcElement.value)
+          .subscribe(result => this.clients = result);
+      }
+    }
+    // console.log(this.clients);
+  }
+
+  selectCountry(selectedCountry) {
+    this.clientForm.patchValue({country: selectedCountry.name});
+    //Empty countries list to close virtual scroll
+    this.countries = [];
+  }
+
+  selectClient(selectedClient) {
+    this.clientForm.patchValue({name: selectedClient.name});
+    this.clientForm.patchValue({idNumber: selectedClient.idNumber});
+    this.clientForm.patchValue({country: selectedClient.idCountry});
+    //Empty countries list to close virtual scroll
+    this.clients = [];
+  }
 }

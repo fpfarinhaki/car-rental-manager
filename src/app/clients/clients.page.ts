@@ -14,7 +14,9 @@ export class ClientsPage {
 
   constructor(private clientService: ClientService,
     private modalController: ModalController) {
-    this.clients = this.clientService.getClients();
+    this.clientService.getClients('')
+      .subscribe((result) => this.clients = result);
+    console.log(this.clients);
   }
 
   async addClient() {

@@ -16,11 +16,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AddClientModalPage],
+  entryComponents: [],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule, ReactiveFormsModule,
-    RouterModule.forChild(routes), 
+    RouterModule.forChild(routes)
   ]
 })
 

@@ -1,4 +1,21 @@
-.segment-item {
+ion-searchbar {
+    --background: transparent;
+    --icon-color: transparent;
+}
+
+ion-auto-complete {
+    --background: transparent;
+    --icon-color: transparent;
+}
+
+ion-segment-button {
+    --border-radius: 5px;
     --padding-top: 3px;
-    --padding-bottom: 3px;  
+    --padding-bottom: 3px;
+    --padding-start: 2px;
+    --padding-end: 2px;
+    --margin-bottom: 3px;
+    --margin-top: 3px;
+    width: 30%;
+    font-size: 0.8em; 
 }
