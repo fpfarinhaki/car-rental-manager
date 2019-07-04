@@ -21,6 +21,7 @@ export class AddRentalModalPage implements OnInit {
   searchingClient = false;
 
   selectedCar: Car;
+  availableCars = [];
   availableCategoryA = [];
   availableCategoryB = [];
   availableCategoryC = [];
@@ -31,9 +32,10 @@ export class AddRentalModalPage implements OnInit {
   }
 
   ngOnInit() {
-    this.availableCategoryA = this.carService.getCars().filter((car) => car.category === CarCategory.A);
-    this.availableCategoryB = this.carService.getCars().filter((car) => car.category === CarCategory.B);
-    this.availableCategoryC = this.carService.getCars().filter((car) => car.category === CarCategory.C);
+    this.availableCars = this.carService.getCars().filter(car => !car.client);
+    this.availableCategoryA = this.availableCars.filter((car) => car.category === CarCategory.A);
+    this.availableCategoryB = this.availableCars.filter((car) => car.category === CarCategory.B);
+    this.availableCategoryC = this.availableCars.filter((car) => car.category === CarCategory.C);
   }
 
   searchClient(event) {

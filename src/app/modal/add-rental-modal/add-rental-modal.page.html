@@ -6,21 +6,21 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-content>
-      <ion-label color="primary" position="stacked">Cliente</ion-label>
+    <ion-card-content>  
       <ion-item lines="none">
-        <ion-input [(ngModel)]="clientName" (ionInput)="searchClient($event)"
-            placeholder="Nombre completo" [debounce]="350">
-        </ion-input>
-        <ion-buttons>
-          <ion-button (click)="viewClient()" *ngIf="selectedClient && !searchingClient">
-            <ion-icon name="eye"></ion-icon>
-          </ion-button>
-          <ion-button (click)="addClient()" *ngIf="clientNotFound && !searchingClient">
-              <ion-icon name="person-add"></ion-icon>
-          </ion-button>
+        <ion-label color="primary">Cliente</ion-label>
+        <ion-buttons slot="end" *ngIf="selectedClient && !searchingClient">
+            <ion-button (click)="onClick()" fill="clear" color="primary">
+             <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+            </ion-button>
         </ion-buttons>
       </ion-item>
+      <ion-item lines="none">
+          <ion-input [(ngModel)]="clientName" (ionInput)="searchClient($event)"
+            placeholder="Nombre completo" [debounce]="350">
+          </ion-input>
+      </ion-item>
+      
       <ion-list *ngIf="clients.length > 0" class="search-result" inset="true">
           <ion-item button *ngFor="let client of clients" (click)="selectClient(client)">
             <ion-label>{{ client.name }}</ion-label>
@@ -31,7 +31,10 @@
         Cliente no encontrado
       </ion-label>
       <div *ngIf="!selectedCar">
-      <ion-label color="primary" position="stacked">Coches Disponibles</ion-label>
+        <ion-item>
+          <ion-label color="primary">Coches Disponibles</ion-label>
+          <ion-badge slot="end">{{ availableCars.length }}</ion-badge>
+        </ion-item>
         <ion-list>
           <ion-item button (click)="openAvailableCars('A')" [disabled]="!selectedClient || searchingClient"> 
             <ion-badge slot="end">{{ availableCategoryA.length }}</ion-badge>
@@ -47,40 +50,30 @@
           </ion-item>
       </ion-list> 
       </div>
-      <div *ngIf="selectedCar && selectedClient">
-        <ion-label color="primary" slot="start">Coche Selecionado
-        <ion-buttons slot="end">
-          <ion-button (click)="onClick()" fill="clear">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-          <ion-button (click)="onClick()" fill="clear">
-              <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-        </ion-label>
-        <ion-item>
-          <ion-thumbnail slot="end">
-            <img [src]="selectedCar.image" />
-          </ion-thumbnail>
-          <ion-label>
-            <ion-text color="medium">
-              <h2>{{ selectedCar.registration }}</h2>
-            </ion-text>
-            <ion-text color="medium">
-              <h3>{{ selectedCar.modelName }}</h3>
-            </ion-text>
-            <ion-text color="medium">
-                <h3>Cantidad Combustible</h3> 
-                <span>
-                  <ion-range min="0" max="100" pin="true" snaps="true" step="25" 
+      <div *ngIf="(selectedCar && selectedClient) && !searchingClient">
+        <ion-item lines="none">
+            <ion-label color="primary">Coche Selecionado</ion-label> 
+            <ion-buttons slot="end">
+                <ion-button (click)="onClick()" fill="clear" color="primary">
+                 <ion-icon slot="icon-only" name="create"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-item>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle color="medium">{{ selectedCar.modelName }}</ion-card-subtitle>
+              <ion-card-title color="medium">{{ selectedCar.registration }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+            <ion-img [src]="selectedCar.image"></ion-img>
+            <ion-range min="0" max="100" pin="true" snaps="true" step="25" 
                   ticks="true" 
                   [value]="selectedCar.fuelIndicator" color="primary">
-                <ion-icon name="remove" slot="start"></ion-icon>
-                <ion-icon name="add" slot="end"></ion-icon>
-                </ion-range></span>
-            </ion-text>
-          </ion-label>
-        </ion-item>
+                <ion-icon src="assets/icon/icon_fuel_3.svg" slot="start"></ion-icon>
+                <ion-icon src="assets/icon/icon_fuel_4.svg" slot="end"></ion-icon>
+            </ion-range>
+            </ion-card-content>
+          </ion-card>
       </div>
     </ion-card-content>
   </ion-card>
