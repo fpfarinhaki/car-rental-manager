@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, AbstractControlOptions, FormBuilder } from '@angular/forms';
-import { ClientService } from 'src/app/services/client.service';
+import { ClientService, Client, IdType } from 'src/app/services/client.service';
 import { CountryService } from 'src/app/services/country.service';
 
 @Component({
@@ -12,18 +12,18 @@ import { CountryService } from 'src/app/services/country.service';
 export class AddClientModalPage implements OnInit {
   countries = [];
   clients = [];
-
   clientForm: FormGroup;
+  @Input('clientName') clientName;
 
   constructor(private modalController: ModalController,
               private clientService: ClientService,
               private formBuilder: FormBuilder, 
-              private countryService: CountryService) {           
+              private countryService: CountryService) {
   }
 
   ngOnInit() {
     this.clientForm = this.formBuilder.group({
-      name : new FormControl('', Validators.required),
+      name : new FormControl(this.clientName, Validators.required),
       idNumber: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required)
     }, {updateOn: 'change'});
@@ -33,10 +33,18 @@ export class AddClientModalPage implements OnInit {
   onSubmit() {
     console.log(this.clientForm.value);
     const value = this.clientForm.value;
-    // const client: Client = {};
-    // console.log(client);
-    // this.clientService.addClient(client);
-    this.modalController.dismiss();
+    const client: Client = {
+      name: value['name'],
+      idNumber: value['idNumber'],
+      idType: IdType.PASSAPORTE,
+      idCountry: value['country'],
+      idExpirationDate: Date.now().toString(),
+      driverLicenseCountry: value['country'],
+      driverLicenseExpirationDate: Date.now().toString(),
+      driverLicenseNumber: '1233455'
+    };
+    this.clientService.addClient(client);
+    this.modalController.dismiss(client);
   }
 
   dismiss() {
@@ -62,30 +70,9 @@ export class AddClientModalPage implements OnInit {
     console.log(this.countries);
   }
 
-  searchClient(event) {
-    // console.log(event.srcElement.value);
-    if (event.srcElement.value == '') {
-      this.clients = [];
-    } else {
-      if (event.srcElement.value.length > 1) {
-        this.clientService.getClients(event.srcElement.value)
-          .subscribe(result => this.clients = result);
-      }
-    }
-    // console.log(this.clients);
-  }
-
   selectCountry(selectedCountry) {
     this.clientForm.patchValue({country: selectedCountry.name});
     //Empty countries list to close virtual scroll
     this.countries = [];
-  }
-
-  selectClient(selectedClient) {
-    this.clientForm.patchValue({name: selectedClient.name});
-    this.clientForm.patchValue({idNumber: selectedClient.idNumber});
-    this.clientForm.patchValue({country: selectedClient.idCountry});
-    //Empty countries list to close virtual scroll
-    this.clients = [];
   }
 }

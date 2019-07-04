@@ -12,6 +12,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddClientModalPageModule } from './modal/add-client-modal/add-client-modal.module';
 import { AddCarModalPageModule } from './modal/add-car-modal/add-car-modal.module';
 import { HttpClientModule } from '@angular/common/http'
+import { AddRentalModalPageModule } from './modal/add-rental-modal/add-rental-modal.module';
+import { AvailableCarsModalPageModule } from './modal/available-cars-modal/available-cars-modal.module';
 
 
 @NgModule({
@@ -20,8 +22,9 @@ import { HttpClientModule } from '@angular/common/http'
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule, FormsModule, 
-    AddClientModalPageModule, AddCarModalPageModule,
+    ReactiveFormsModule, FormsModule,
+    AddClientModalPageModule, AddCarModalPageModule, AddRentalModalPageModule,
+    AvailableCarsModalPageModule,
     HttpClientModule
   ],
   providers: [

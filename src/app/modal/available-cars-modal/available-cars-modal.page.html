@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary">Coches Disponibles en categoria {{ category }}</ion-title>
+    <ion-button (click)="dismiss()" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+    <!-- <ion-searchbar placeholder="Search by registration" 
+        (ionInput)="searchByRegistration($event)" [debounce]="250"></ion-searchbar> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list padding>
+        <ion-item *ngFor="let car of availableCars" button (click)="selectCar(car)">
+          <ion-avatar slot="start">
+            <img [src]="car.image" />
+          </ion-avatar>
+          <ion-label>
+            <ion-text color="dark">
+              <h2>{{ car.registration }}</h2>
+            </ion-text>
+            <ion-text color="medium">
+              <h3>{{ car.modelName }}</h3>
+            </ion-text>
+          </ion-label>
+          <ion-icon slot="end" name="information-circle"></ion-icon>
+        </ion-item>
+    </ion-list>
+</ion-content>

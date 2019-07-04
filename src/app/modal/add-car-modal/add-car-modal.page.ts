@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { CarService, Car } from 'src/app/services/car.service';
+import { CarService, Car, FuelQuantity } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-add-car-modal',
@@ -38,7 +38,8 @@ export class AddCarModalPage implements OnInit {
       registration: value['registration'],
       color: value['color'],
       category: value['category'],
-      fuelType: value['fuelType']
+      fuelType: value['fuelType'], 
+      fuelIndicator: FuelQuantity.HALF
     }
     console.log(car);
     this.carService.addCar(car);

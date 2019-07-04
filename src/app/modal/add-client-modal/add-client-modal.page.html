@@ -1,83 +1,59 @@
 <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button (click)="dismiss()">
-          <ion-icon name="close"></ion-icon>
+      <ion-buttons slot="start">
+        <ion-button color="primary" (click)="dismiss()">
+          Cancelar
         </ion-button>
       </ion-buttons>
-      <ion-title>Añadir un Cliente</ion-title>
+      <ion-title class="ion-text-center">Añadir un Cliente</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="primary" type="submit" (click)="onSubmit()">
+          Salvar
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
   <ion-content> 
-    <ion-card>
       <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-        <ion-item lines="full">
-          <ion-label position="stacked">Nombre Completo <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input formControlName="name" (ionInput)="searchClient($event)" required auto [debounce]="350"></ion-input>
-          <ion-virtual-scroll [items]="clients" *ngIf="clients.length > 0">
-            <ion-item *virtualItem="let client" button (click)="selectClient(client)">
-              {{ client.name }}
-              {{ client.idNumber}}
-            </ion-item>
-          </ion-virtual-scroll>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label position="stacked">Numero Documento<ion-text color="danger">*</ion-text></ion-label>    
-          <ion-input formControlName="idNumber" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="stacked">País</ion-label>
-            <ion-input formControlName="country" (ionInput)="searchCountry($event)" type="text"></ion-input>
-            <ion-virtual-scroll [items]="countries" *ngIf="countries.length > 0"
-                approxItemHeight="5px">
-              <ion-item *virtualItem="let country" button (click)="selectCountry(country)">
-                {{ country.name }}
+    <ion-card>
+      <ion-card-content>
+              <ion-label color="primary" position="stacked">Cliente<ion-text color="danger">*</ion-text></ion-label>
+              <ion-item lines="full">
+                  <ion-input formControlName="name" placeholder="Nombre completo"></ion-input>
               </ion-item>
-            </ion-virtual-scroll>
-        </ion-item>
-      <ion-item lines="none">
-        <ion-segment (ionChange)="segmentChanged($event)" color="primary" 
-        class="ion-padding-top ion-padding-bottom">
-          <ion-segment-button layout="icon-top">
-            <ion-icon name="card"></ion-icon>
-              DNI
-          </ion-segment-button>
-          <ion-segment-button layout="icon-top">
-              <ion-icon name="journal"></ion-icon>
-              Passaporte  
-          </ion-segment-button>
-          <ion-segment-button layout="icon-top">
-            <ion-icon name="bookmarks"></ion-icon>
-            Otro
-          </ion-segment-button>
-        </ion-segment>
-      </ion-item> 
-        <ion-button type="submit" (click)="onSubmit()" [disabled]="clientForm.invalid" expand="block">
-          Proximo
-        </ion-button>
-        <ion-button (click)="dismiss()" color="danger" expand="block">
-          Cancelar
-        </ion-button>
-      </form> 
+              <ion-label color="primary" position="stacked">Numero Documento<ion-text color="danger">*</ion-text></ion-label>    
+              <ion-item lines="full">
+                  <ion-input formControlName="idNumber" type="text"></ion-input>
+              </ion-item>
+              <ion-label color="primary" position="stacked">País<ion-text color="danger">*</ion-text></ion-label>
+              <ion-item>
+                <ion-input formControlName="country" (ionInput)="searchCountry($event)" type="text"></ion-input> 
+              </ion-item>
+              <ion-list *ngIf="countries.length > 0" class="search-result">
+                  <ion-item button *ngFor="let country of countries" (click)="selectCountry(country)">
+                    <ion-label>{{ country.name }}</ion-label>
+                  </ion-item>
+                </ion-list>
+              <ion-label color="primary" position="stacked" color="primary">Tipo de Documento<ion-text color="danger">*</ion-text></ion-label>
+              <ion-item lines="none">
+                <ion-segment (ionChange)="segmentChanged($event)" color="primary" class="ion-padding-top ion-padding-bottom">
+                  <ion-segment-button layout="icon-top">
+                    <ion-icon name="card"></ion-icon>
+                      DNI
+                  </ion-segment-button>
+                  <ion-segment-button layout="icon-top">
+                      <ion-icon name="journal"></ion-icon>
+                      Passaporte  
+                  </ion-segment-button>
+                  <ion-segment-button layout="icon-top">
+                    <ion-icon name="bookmarks"></ion-icon>
+                    Otro
+                  </ion-segment-button>
+                </ion-segment>
+              </ion-item>
+             
+      </ion-card-content>
     </ion-card>
-    
-          <!-- <ion-item lines="none">
-            <ion-label position="floating" color="medium">Fone</ion-label>
-            <ion-input formControlName="phone" type="tel" placeholder="ex.(34)555-672-567"></ion-input>  
-          </ion-item> 
-          <ion-item>
-            <ion-label position="floating" color="medium">Ubicacion</ion-label>
-            <ion-input formControlName="address" type="text"></ion-input>  
-          </ion-item>
-          <ion-label position="fixed" color="medium">Tipo Documento</ion-label>
-          
-          <ion-label position="inline" slot="start" color="medium">Fecha Validad</ion-label>
-          <ion-datetime formControlName="idExpirationDate" display-format="DD.MM.YYYY" 
-            placeholder="Seleciona Fecha" class="ion-no-padding" slot="end"></ion-datetime>
-          <ion-label position="inline" color="medium">País<ion-text color="danger">*</ion-text></ion-label>
-          <ion-select formControlName="country" placeholder="Seleciona País">
-            <ion-select-option *ngFor="let country of countries" [value]="country">{{country}}</ion-select-option>
-          </ion-select> -->
-
+  </form>
  </ion-content>

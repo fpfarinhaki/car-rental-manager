@@ -73,18 +73,19 @@ export class ClientService {
 
 export class Client {
   public name: string;
-  public idNumber: string; 
+  public idNumber: string;
   public idType: IdType;
-  public idExpirationDate: Date;
+  public idExpirationDate: string;
   public idCountry: string;
   public driverLicenseNumber: string;
-  public driverLicenseExpirationDate: Date;
+  public driverLicenseExpirationDate: string;
   public driverLicenseCountry: string;
   public currentRental?: any;
   public previousRentals?: any[];
+
 }
 
 export enum IdType {
-  DNI = "D.N.I", PASSAPORTE = "Passaporte", OTHER = "Otro"
+  DNI = 'D.N.I', PASSAPORTE = 'Passaporte', OTHER = 'Otro'
 }
 

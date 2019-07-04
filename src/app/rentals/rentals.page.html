@@ -1,11 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Alquilados
+      Alquileres
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    
+    <ion-list>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>05-Mar - 10-Mar 18:30</ion-card-subtitle>
+          <ion-card-title>Seat Ibiza - AXN 09092</ion-card-title>
+          <ion-card-content>
+            Informacion del alquiler
+            *cliente, combustivel...
+          </ion-card-content>
+        </ion-card-header>
+      </ion-card>
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button vertical (click)="addRental()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

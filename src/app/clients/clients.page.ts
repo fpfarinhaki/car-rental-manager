@@ -13,7 +13,7 @@ export class ClientsPage {
   clients = [];
 
   constructor(private clientService: ClientService,
-    private modalController: ModalController) {
+              private modalController: ModalController) {
     this.clientService.getClients('')
       .subscribe((result) => this.clients = result);
     console.log(this.clients);
