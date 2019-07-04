@@ -36,15 +36,15 @@
           <ion-badge slot="end">{{ availableCars.length }}</ion-badge>
         </ion-item>
         <ion-list>
-          <ion-item button (click)="openAvailableCars('A')" [disabled]="!selectedClient || searchingClient"> 
+          <ion-item button detail="false" (click)="openAvailableCars('A')" [disabled]="!selectedClient || searchingClient"> 
             <ion-badge slot="end">{{ availableCategoryA.length }}</ion-badge>
             <ion-label>Categoria A</ion-label>
           </ion-item>
-          <ion-item button (click)="openAvailableCars('B')" [disabled]="!selectedClient || searchingClient"> 
+          <ion-item button detail="false" (click)="openAvailableCars('B')" [disabled]="!selectedClient || searchingClient"> 
             <ion-badge slot="end">{{ availableCategoryB.length }}</ion-badge>
             <ion-label>Categoria B</ion-label>
           </ion-item>
-          <ion-item button (click)="openAvailableCars('C')" [disabled]="!selectedClient || searchingClient">
+          <ion-item button detail="false" (click)="openAvailableCars('C')" [disabled]="!selectedClient || searchingClient">
             <ion-badge slot="end">{{ availableCategoryC.length }}</ion-badge>
             <ion-label>Categoria C</ion-label>
           </ion-item>
