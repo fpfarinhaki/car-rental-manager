@@ -5,82 +5,70 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>  
-      <ion-item lines="none">
+    <ion-item lines="none">
         <ion-label color="primary">Cliente</ion-label>
-        <ion-buttons slot="end" *ngIf="selectedClient && !searchingClient">
-            <ion-button (click)="onClick()" fill="clear" color="primary">
-             <ion-icon slot="icon-only" name="information-circle"></ion-icon>
-            </ion-button>
+        <ion-buttons slot="end">
+          <ion-button (click)="addClient()" *ngIf="clientNotFound" fill="clear" color="primary">
+            <ion-icon name="person-add"></ion-icon>
+          </ion-button>
+          <ion-button (click)="searchClient($event)" *ngIf="selectedClient" fill="clear" color="primary">
+            <ion-icon name="search"></ion-icon>
+          </ion-button>
         </ion-buttons>
       </ion-item>
-      <ion-item lines="none">
+      <ion-item lines="none" *ngIf="!selectedClient || searchingClient">
           <ion-input [(ngModel)]="clientName" (ionInput)="searchClient($event)"
             placeholder="Nombre completo" [debounce]="350">
           </ion-input>
       </ion-item>
-      
-      <ion-list *ngIf="clients.length > 0" class="search-result" inset="true">
+      <div *ngIf="clients.length > 0">
+        <ion-list>
           <ion-item button *ngFor="let client of clients" (click)="selectClient(client)">
             <ion-label>{{ client.name }}</ion-label>
           </ion-item>
-      </ion-list>
+        </ion-list>
+      </div>
       <ion-label *ngIf="clientNotFound && !searchingClient" color="danger">
         <ion-icon name="information"></ion-icon>
         Cliente no encontrado
       </ion-label>
-      <div *ngIf="!selectedCar">
-        <ion-item>
-          <ion-label color="primary">Coches Disponibles</ion-label>
-          <ion-badge slot="end">{{ availableCars.length }}</ion-badge>
-        </ion-item>
-        <ion-list>
-          <ion-item button detail="false" (click)="openAvailableCars('A')" [disabled]="!selectedClient || searchingClient"> 
-            <ion-badge slot="end">{{ availableCategoryA.length }}</ion-badge>
-            <ion-label>Categoria A</ion-label>
-          </ion-item>
-          <ion-item button detail="false" (click)="openAvailableCars('B')" [disabled]="!selectedClient || searchingClient"> 
-            <ion-badge slot="end">{{ availableCategoryB.length }}</ion-badge>
-            <ion-label>Categoria B</ion-label>
-          </ion-item>
-          <ion-item button detail="false" (click)="openAvailableCars('C')" [disabled]="!selectedClient || searchingClient">
-            <ion-badge slot="end">{{ availableCategoryC.length }}</ion-badge>
-            <ion-label>Categoria C</ion-label>
-          </ion-item>
-      </ion-list> 
-      </div>
-      <div *ngIf="(selectedCar && selectedClient) && !searchingClient">
-        <ion-item lines="none">
-            <ion-label color="primary">Coche Selecionado</ion-label> 
-            <ion-buttons slot="end">
-                <ion-button (click)="onClick()" fill="clear" color="primary">
-                 <ion-icon slot="icon-only" name="create"></ion-icon>
-                </ion-button>
-            </ion-buttons>
-        </ion-item>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-subtitle color="medium">{{ selectedCar.modelName }}</ion-card-subtitle>
-              <ion-card-title color="medium">{{ selectedCar.registration }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-            <ion-img [src]="selectedCar.image"></ion-img>
-            <ion-range min="0" max="100" pin="true" snaps="true" step="25" 
-                  ticks="true" 
-                  [value]="selectedCar.fuelIndicator" color="primary">
-                <ion-icon src="assets/icon/icon_fuel_3.svg" slot="start"></ion-icon>
-                <ion-icon src="assets/icon/icon_fuel_4.svg" slot="end"></ion-icon>
-            </ion-range>
-            </ion-card-content>
-          </ion-card>
-      </div>
-    </ion-card-content>
-  </ion-card>
-  <ion-button type="submit" (click)="onSubmit()" [disabled]="!selectedCar || !selectedClient" expand="block">
-      Confirmar
+  <ion-card *ngIf="selectedClient && !searchingClient">
+      <ion-card-header color="primary">
+          <ion-card-subtitle>{{ selectedClient.name }}</ion-card-subtitle>  
+      </ion-card-header>
+        <ion-card-content>
+            <ion-item-group class="ion-no-padding">
+              <ion-item-divider color="light">
+                <ion-label>Identificación</ion-label>
+              </ion-item-divider>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-text color="medium">
+                    <p>{{ selectedClient.idNumber }} - {{ selectedClient.idType }}</p>
+                    <p>{{ selectedClient.idExpirationDate }}</p>
+                    <p>{{ selectedClient.idCountry}}</p>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item-divider color="light">
+                <ion-label>Permiso</ion-label>
+              </ion-item-divider>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-text color="medium">
+                    <p>{{selectedClient.driverLicenseNumber}}</p>
+                    <p>{{selectedClient.driverLicenseExpirationDate}}</p>
+                    <p>{{selectedClient.driverLicenseCountry}}</p>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+            </ion-item-group>
+        </ion-card-content>
+      </ion-card>
+  <ion-button routerLink="/rental-details-car" rootDirection="forward" [disabled]="!selectedClient" expand="block">
+      Próximo
     </ion-button>
-    <ion-button (click)="dismiss()" color="danger" expand="block">
+    <ion-button routerLink="/rentals" color="danger" expand="block">
       Cancelar
     </ion-button>
 </ion-content>

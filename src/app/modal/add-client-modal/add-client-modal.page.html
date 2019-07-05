@@ -30,11 +30,13 @@
               <ion-item>
                 <ion-input formControlName="country" (ionInput)="searchCountry($event)" type="text"></ion-input> 
               </ion-item>
-              <ion-list *ngIf="countries.length > 0" class="search-result">
+              <div *ngIf="countries.length > 0">
+                <ion-list>
                   <ion-item button *ngFor="let country of countries" (click)="selectCountry(country)">
                     <ion-label>{{ country.name }}</ion-label>
                   </ion-item>
                 </ion-list>
+              </div>
               <ion-label color="primary" position="stacked" color="primary">Tipo de Documento<ion-text color="danger">*</ion-text></ion-label>
               <ion-item lines="none">
                 <ion-segment (ionChange)="segmentChanged($event)" color="primary" class="ion-padding-top ion-padding-bottom">

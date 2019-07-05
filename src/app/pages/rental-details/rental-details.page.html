@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fechas de Alquiler</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-label color="primary" position="fixed">Retirada</ion-label>
+  <ion-item>
+    <ion-datetime color="secondary" slot="end"
+        display-format="DD.MM.YYYY - HH:mm" [min]="minDate" [value]="now"></ion-datetime>
+  </ion-item>
+  <ion-label color="primary" position="fixed">Retorno</ion-label>
+  <ion-item>
+    <ion-datetime color="secondary" slot="end" placeholder="Seleciona retorno"
+        display-format="DD.MM.YYYY - HH:mm"></ion-datetime>
+  </ion-item>
+  <ion-button routerLink="/rental-details-payment" rootDirection="forward" expand="block">
+    Proximo
+  </ion-button>
+  <ion-button routerLink="/rentals" color="danger" expand="block">
+    Cancelar
+  </ion-button>
+</ion-content>

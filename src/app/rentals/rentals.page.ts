@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AddRentalModalPage } from '../modal/add-rental-modal/add-rental-modal.page';
-import { ModalController } from '@ionic/angular';
+import { RentalService } from '../services/rental.service';
 
 @Component({
   selector: 'app-rentals',
@@ -9,13 +8,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class RentalsPage {
 
-  constructor(private modalController: ModalController) {}
-
-
-  async addRental() {
-    const modal = await this.modalController.create({
-      component: AddRentalModalPage
-    });
-    return await modal.present();
+  rentals = [];
+  constructor(private rentalService: RentalService) {
+    this.rentals = rentalService.getRentals();
   }
+  
 }

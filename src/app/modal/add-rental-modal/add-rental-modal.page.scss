@@ -11,7 +11,8 @@ ion-segment-button {
 }
 
 .search-result {
-    max-height: 10%;
+    max-height: 50%;
+    overflow-y: scroll;
 }
 
 ion-thumbnail {

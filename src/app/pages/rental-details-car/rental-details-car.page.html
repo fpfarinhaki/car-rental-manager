@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Selección de Coche</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="!selectedCar">
+        <ion-item>
+          <ion-label color="primary">Coches Disponibles</ion-label>
+          <ion-badge slot="end">{{ availableCars.length }}</ion-badge>
+        </ion-item>
+        <ion-list>
+          <ion-item button detail="false" (click)="openAvailableCars('A')"> 
+            <ion-badge slot="end">{{ availableCategoryA.length }}</ion-badge>
+            <ion-label>Categoria A</ion-label>
+          </ion-item>
+          <ion-item button detail="false" (click)="openAvailableCars('B')"> 
+            <ion-badge slot="end">{{ availableCategoryB.length }}</ion-badge>
+            <ion-label>Categoria B</ion-label>
+          </ion-item>
+          <ion-item button detail="false" (click)="openAvailableCars('C')">
+            <ion-badge slot="end">{{ availableCategoryC.length }}</ion-badge>
+            <ion-label>Categoria C</ion-label>
+          </ion-item>
+      </ion-list> 
+      </div>
+      <div *ngIf="selectedCar">
+        <ion-item lines="none">
+            <ion-label color="primary">Coche Selecionado</ion-label> 
+            <ion-buttons slot="end">
+                <ion-button (click)="onClick()" fill="clear" color="primary">
+                 <ion-icon slot="icon-only" name="create"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-item>
+        <ion-card>
+          <ion-card-header color="primary">
+            <ion-card-subtitle>{{ selectedCar.modelName }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ selectedCar.registration }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-range class="ion-no-padding" min="0" max="100" pin="true" snaps="true" step="25" ticks="true" [value]="selectedCar.fuelIndicator">
+              <ion-icon src="assets/icon/icon_fuel_3.svg" slot="start"></ion-icon>
+              <ion-icon src="assets/icon/icon_fuel_4.svg" slot="end"></ion-icon>
+            </ion-range>
+            <img [src]="selectedCar.image" size="small" />
+            <ion-text color="medium" slot="end">
+              <ul>
+                <li>Km: 13.230</li>
+
+              </ul>
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <ion-button routerLink="/rental-details" rootDirection="forward" [disabled]="!selectedCar" expand="block">
+        Próximo
+      </ion-button>
+      <ion-button routerLink="/rentals" color="danger" expand="block">
+        Cancelar
+      </ion-button>
+</ion-content>

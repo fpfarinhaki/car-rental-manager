@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService, Client } from 'src/app/services/client.service';
-import { ModalController, AlertController, PopoverController } from '@ionic/angular';
-import { CountryService } from 'src/app/services/country.service';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { AvailableCarsModalPage } from '../available-cars-modal/available-cars-modal.page';
 import { Car, CarService, CarCategory } from 'src/app/services/car.service';
 import { AddClientModalPage } from '../add-client-modal/add-client-modal.page';
+import { Rental, RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-add-rental-modal',
@@ -20,28 +19,21 @@ export class AddRentalModalPage implements OnInit {
   selectedClient: Client;
   searchingClient = false;
 
-  selectedCar: Car;
-  availableCars = [];
-  availableCategoryA = [];
-  availableCategoryB = [];
-  availableCategoryC = [];
+  rental: Rental;
 
   constructor(private clientService: ClientService,
-              private carService: CarService,
+              private rentalService: RentalService,
               private modalController: ModalController) {
   }
 
   ngOnInit() {
-    this.availableCars = this.carService.getCars().filter(car => !car.client);
-    this.availableCategoryA = this.availableCars.filter((car) => car.category === CarCategory.A);
-    this.availableCategoryB = this.availableCars.filter((car) => car.category === CarCategory.B);
-    this.availableCategoryC = this.availableCars.filter((car) => car.category === CarCategory.C);
   }
 
   searchClient(event) {
     const keyword = event.srcElement.value;
     this.clientName = keyword;
     this.searchingClient = true;
+    if (!keyword) return;
     if (keyword.length <= 2) {
       this.clearForm();
       return;
@@ -63,7 +55,6 @@ export class AddRentalModalPage implements OnInit {
     this.clients = [];
     this.clientNotFound = false;
     this.selectedClient = null;
-    this.selectedCar = null;
   }
 
   addClient() {
@@ -85,28 +76,10 @@ export class AddRentalModalPage implements OnInit {
 
   selectClient(client: Client) {
     this.selectedClient = client;
-    this.clientName = this.selectedClient.name;
+    this.clientName = '';
     this.clients = [];
     this.clientNotFound = false;
     this.searchingClient = false;
     // console.log(this.client);
   }
-
-  async openAvailableCars(selectedCategory) {
-    if (this.selectedClient) {
-      const modal = await this.modalController.create({
-        component: AvailableCarsModalPage,
-        componentProps: {category: selectedCategory}
-      });
-      modal.onDidDismiss().then(data => {
-        this.selectedCar = data.data;
-      });
-      return await modal.present();
-    }
-  }
-
-  dismiss() {
-    this.modalController.dismiss();
-  }
-
 }
