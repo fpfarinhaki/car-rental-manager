@@ -51,16 +51,16 @@
             <ion-text color="medium" slot="end">
               <ul>
                 <li>Km: 13.230</li>
-
               </ul>
             </ion-text>
           </ion-card-content>
         </ion-card>
       </div>
-      <ion-button routerLink="/rental-details" rootDirection="forward" [disabled]="!selectedCar" expand="block">
+      <ion-button routerLink="/rental-details" routerDirection="forward" 
+                  [disabled]="!selectedCar" expand="block" color="success">
         Próximo
       </ion-button>
-      <ion-button routerLink="/rentals" color="danger" expand="block">
+      <ion-button routerLink="/rentals" routerDirection="root" color="danger" expand="block">
         Cancelar
       </ion-button>
 </ion-content>

@@ -10,6 +10,7 @@ export class RentalsPage {
 
   rentals = [];
   constructor(private rentalService: RentalService) {
+    this.rentalService.cleanCurrentRental();
     this.rentals = rentalService.getRentals();
   }
   

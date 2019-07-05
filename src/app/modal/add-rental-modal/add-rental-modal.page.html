@@ -65,11 +65,12 @@
             </ion-item-group>
         </ion-card-content>
       </ion-card>
-  <ion-button routerLink="/rental-details-car" rootDirection="forward" [disabled]="!selectedClient" expand="block">
-      Próximo
-    </ion-button>
-    <ion-button routerLink="/rentals" color="danger" expand="block">
-      Cancelar
-    </ion-button>
+      <ion-button routerLink="/rental-details-car" routerDirection="forward" 
+                  [disabled]="!selectedClient" expand="block" color="success">
+        Próximo
+      </ion-button>
+      <ion-button routerLink="/rentals" routerDirection="root" color="danger" expand="block">
+        Cancelar
+      </ion-button>
 </ion-content>
 

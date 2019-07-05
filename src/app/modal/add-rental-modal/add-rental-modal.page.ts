@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService, Client } from 'src/app/services/client.service';
 import { ModalController } from '@ionic/angular';
-import { AvailableCarsModalPage } from '../available-cars-modal/available-cars-modal.page';
-import { Car, CarService, CarCategory } from 'src/app/services/car.service';
 import { AddClientModalPage } from '../add-client-modal/add-client-modal.page';
-import { Rental, RentalService } from 'src/app/services/rental.service';
+import { RentalBuilder, RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-add-rental-modal',
@@ -18,9 +16,7 @@ export class AddRentalModalPage implements OnInit {
   clientNotFound = false;
   selectedClient: Client;
   searchingClient = false;
-
-  rental: Rental;
-
+  
   constructor(private clientService: ClientService,
               private rentalService: RentalService,
               private modalController: ModalController) {
@@ -66,9 +62,7 @@ export class AddRentalModalPage implements OnInit {
       modal.present();
       modal.onDidDismiss().then(dismissData => {
         if (dismissData.data) {
-          this.selectedClient = dismissData.data;
-          this.clientName = this.selectedClient.name;
-          this.clientNotFound = false;
+          this.selectClient(dismissData.data);
         }
       });
     });
@@ -76,10 +70,11 @@ export class AddRentalModalPage implements OnInit {
 
   selectClient(client: Client) {
     this.selectedClient = client;
-    this.clientName = '';
-    this.clients = [];
+    this.clientName = this.selectedClient.name;
     this.clientNotFound = false;
     this.searchingClient = false;
-    // console.log(this.client);
+    this.clients = [];
+    this.rentalService.aRental();
+    this.rentalService.withClient(client);
   }
 }

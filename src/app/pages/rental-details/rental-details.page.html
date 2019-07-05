@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Fechas de Alquiler</ion-title>
+    <ion-title>Fechas</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -11,18 +11,23 @@
   
   <ion-label color="primary" position="fixed">Retirada</ion-label>
   <ion-item>
-    <ion-datetime color="secondary" slot="end"
-        display-format="DD.MM.YYYY - HH:mm" [min]="minDate" [value]="now"></ion-datetime>
+    <ion-datetime color="secondary" [value]="now" (ionChange)="changePickupDate($event)"
+        slot="end"
+        display-format="DD.MM -- HH:mm" [min]="minDate" 
+        minuteValues="0,30"></ion-datetime>
   </ion-item>
   <ion-label color="primary" position="fixed">Retorno</ion-label>
   <ion-item>
-    <ion-datetime color="secondary" slot="end" placeholder="Seleciona retorno"
-        display-format="DD.MM.YYYY - HH:mm"></ion-datetime>
+    <ion-datetime color="secondary" slot="end" (ionChange)="changeReturnDate($event)"
+        placeholder="Seleciona retorno"
+        display-format="DD.MM -- HH:mm"  [min]="minDate"
+        minuteValues="0,30"></ion-datetime>
   </ion-item>
-  <ion-button routerLink="/rental-details-payment" rootDirection="forward" expand="block">
+  <ion-button routerLink="/rental-details-payment" routerDirection="forward" 
+              color="success" expand="block" [disabled]="!pickupDate || !returnDate">
     Proximo
   </ion-button>
-  <ion-button routerLink="/rentals" color="danger" expand="block">
+  <ion-button routerLink="/rentals" routerDirection="root" color="danger" expand="block">
     Cancelar
   </ion-button>
 </ion-content>

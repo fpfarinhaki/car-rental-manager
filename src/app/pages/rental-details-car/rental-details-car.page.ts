@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car, CarCategory, CarService } from 'src/app/services/car.service';
 import { ModalController } from '@ionic/angular';
 import { AvailableCarsModalPage } from 'src/app/modal/available-cars-modal/available-cars-modal.page';
+import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-rental-details-car',
@@ -17,6 +18,7 @@ export class RentalDetailsCarPage implements OnInit {
   availableCategoryC = [];
 
   constructor(private carService: CarService,
+              private rentalService: RentalService,
               private modalController: ModalController) { 
     this.availableCars = this.carService.getCars().filter(car => !car.client);
     this.availableCategoryA = this.availableCars.filter((car) => car.category === CarCategory.A);
@@ -25,6 +27,10 @@ export class RentalDetailsCarPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidLeave() {
+    this.rentalService.withCar(this.selectedCar);
   }
 
   async openAvailableCars(selectedCategory) {
