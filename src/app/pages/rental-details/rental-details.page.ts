@@ -9,30 +9,23 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalDetailsPage implements OnInit {
 
   now: string;
-  pickupDate: Date;
-  returnDate: Date;
+  pickupDate: string;
+  returnDate: string;
   minDate: string = new Date().toISOString();
 
   constructor(private rentalService: RentalService) {
   }
 
-  ionViewDidLeave() {
-    this.rentalService.withPickupDate(this.pickupDate);
-    this.rentalService.withReturnDate(this.returnDate);
+  ionViewWillLeave() {
+    console.log(this.pickupDate);
+    console.log(this.returnDate);
+    this.rentalService.withPickupDate(new Date(this.pickupDate));
+    this.rentalService.withReturnDate(new Date(this.returnDate));
   }
 
   ngOnInit() {
-    this.pickupDate = new Date();
-    this.now = new Date().toISOString();
+    this.pickupDate = new Date().toISOString();
     this.minDate = new Date().toISOString();
-  }
-
-  changePickupDate(event) {
-    this.pickupDate = event.srcElement.value;
-  }
-
-  changeReturnDate(event) {
-    this.returnDate = event.srcElement.value;
   }
 
 }

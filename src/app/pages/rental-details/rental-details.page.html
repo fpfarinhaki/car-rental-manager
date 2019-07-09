@@ -11,17 +11,15 @@
   
   <ion-label color="primary" position="fixed">Retirada</ion-label>
   <ion-item>
-    <ion-datetime color="secondary" [value]="now" (ionChange)="changePickupDate($event)"
-        slot="end"
-        display-format="DD.MM -- HH:mm" [min]="minDate" 
-        minuteValues="0,30"></ion-datetime>
+    <ion-datetime [(ngModel)]="pickupDate" color="secondary"
+        slot="end" display-format="DD.MM - HH:mm" [min]="minDate" minuteValues="0,30">
+    </ion-datetime>
   </ion-item>
   <ion-label color="primary" position="fixed">Retorno</ion-label>
   <ion-item>
-    <ion-datetime color="secondary" slot="end" (ionChange)="changeReturnDate($event)"
-        placeholder="Seleciona retorno"
-        display-format="DD.MM -- HH:mm"  [min]="minDate"
-        minuteValues="0,30"></ion-datetime>
+    <ion-datetime [(ngModel)]="returnDate" color="secondary" slot="end"
+        placeholder="Seleciona retorno" display-format="DD.MM - HH:mm"  [min]="minDate" minuteValues="0,30">
+    </ion-datetime>
   </ion-item>
   <ion-button routerLink="/rental-details-payment" routerDirection="forward" 
               color="success" expand="block" [disabled]="!pickupDate || !returnDate">
