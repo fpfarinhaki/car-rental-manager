@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ClientService, Client } from 'src/app/services/client.service';
 import { ModalController } from '@ionic/angular';
 import { AddClientModalPage } from '../add-client-modal/add-client-modal.page';
-import { RentalBuilder, RentalService } from 'src/app/services/rental.service';
+import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-add-rental-modal',

@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-item lines="none">
-        <ion-label color="primary">Cliente</ion-label>
+      <ion-item lines="none">
+        <ion-label color="primary" slot="start">Cliente</ion-label>
         <ion-buttons slot="end">
           <ion-button (click)="addClient()" *ngIf="clientNotFound" fill="clear" color="primary">
             <ion-icon name="person-add"></ion-icon>
@@ -15,11 +15,9 @@
             <ion-icon name="search"></ion-icon>
           </ion-button>
         </ion-buttons>
-      </ion-item>
-      <ion-item lines="none" *ngIf="!selectedClient || searchingClient">
-          <ion-input [(ngModel)]="clientName" (ionInput)="searchClient($event)"
+        <ion-input #inputName [(ngModel)]="clientName" (ionInput)="searchClient($event)"
             placeholder="Nombre completo" [debounce]="350">
-          </ion-input>
+        </ion-input>
       </ion-item>
       <div *ngIf="clients.length > 0">
         <ion-list>

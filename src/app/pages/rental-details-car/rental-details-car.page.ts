@@ -33,7 +33,7 @@ export class RentalDetailsCarPage implements OnInit {
     this.rentalService.withCar(this.selectedCar);
   }
 
-  async openAvailableCars(selectedCategory) {
+  async openAvailableCars(selectedCategory?) {
     const modal = await this.modalController.create({
       component: AvailableCarsModalPage,
       componentProps: {category: selectedCategory}
@@ -43,6 +43,5 @@ export class RentalDetailsCarPage implements OnInit {
     });
     return await modal.present();
   }
-
 
 }

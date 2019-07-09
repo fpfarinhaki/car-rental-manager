@@ -58,4 +58,10 @@ export class Rental {
   pickupDate?: Date;
   returnDate?: Date;
   pickupLocation?: string;
+  accessories?: ACCESSORIES[];
+}
+
+export enum ACCESSORIES {
+  GPS = "GPS", BABY_SEAT = "Sila Niño", 
+  CHILD_SEAT = "Sila", WIFI = "Wifi"
 }

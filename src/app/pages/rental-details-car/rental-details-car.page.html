@@ -9,7 +9,7 @@
 
 <ion-content>
     <div *ngIf="!selectedCar">
-        <ion-item>
+        <ion-item button detail="false" (click)="openAvailableCars()">
           <ion-label color="primary">Coches Disponibles</ion-label>
           <ion-badge slot="end">{{ availableCars.length }}</ion-badge>
         </ion-item>

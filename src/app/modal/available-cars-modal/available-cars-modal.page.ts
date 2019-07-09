@@ -19,8 +19,12 @@ export class AvailableCarsModalPage implements OnInit {
               private modalController: ModalController) { }
 
   ngOnInit() {
-    this.availableCars = this.carService.getCars()
+    if (!this.category) {
+      this.availableCars = this.carService.getCars();
+    } else {
+      this.availableCars = this.carService.getCars()
             .filter((car) => car.category === CarCategory[this.category]);
+    }
   }
 
   dismiss() {
