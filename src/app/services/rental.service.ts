@@ -29,8 +29,9 @@ export class RentalService {
     this._rental.client = client;
   }
 
-  withCar(car: Car) {
+  withCar(car: Car, accessories?: CarAcessories[]) {
     this._rental.car = car;
+    this._rental.accessories = accessories;
   }
 
   withPickupDate(pickupDate: Date) {
@@ -58,10 +59,10 @@ export class Rental {
   pickupDate?: Date;
   returnDate?: Date;
   pickupLocation?: string;
-  accessories?: ACCESSORIES[];
+  accessories?: CarAcessories[];
 }
 
-export enum ACCESSORIES {
+export enum CarAcessories {
   GPS = "GPS", BABY_SEAT = "Sila Niño", 
   CHILD_SEAT = "Sila", WIFI = "Wifi"
 }

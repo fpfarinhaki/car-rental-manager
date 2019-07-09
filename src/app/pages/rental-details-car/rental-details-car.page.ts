@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Car, CarCategory, CarService } from 'src/app/services/car.service';
 import { ModalController } from '@ionic/angular';
 import { AvailableCarsModalPage } from 'src/app/modal/available-cars-modal/available-cars-modal.page';
-import { RentalService } from 'src/app/services/rental.service';
+import { RentalService, CarAcessories } from 'src/app/services/rental.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rental-details-car',
@@ -12,6 +13,8 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalDetailsCarPage implements OnInit {
 
   selectedCar: Car;
+  selectedAccessories: CarAcessories[];
+  acessories = [];
   availableCars = [];
   availableCategoryA = [];
   availableCategoryB = [];
@@ -30,7 +33,8 @@ export class RentalDetailsCarPage implements OnInit {
   }
 
   ionViewDidLeave() {
-    this.rentalService.withCar(this.selectedCar);
+    this.rentalService.withCar(this.selectedCar, this.selectedAccessories);
+    // console.log(this.rentalService.currentRental());
   }
 
   async openAvailableCars(selectedCategory?) {
@@ -42,6 +46,10 @@ export class RentalDetailsCarPage implements OnInit {
       this.selectedCar = data.data;
     });
     return await modal.present();
+  }
+
+  selectedAcessories() {
+    this.acessories = this.selectedAccessories.map(aces => CarAcessories[aces]);  
   }
 
 }

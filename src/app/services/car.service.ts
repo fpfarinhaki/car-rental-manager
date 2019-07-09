@@ -15,6 +15,7 @@ export class CarService {
       category: CarCategory.B,
       fuelType: "Gasolina",
       fuelIndicator: FuelQuantity.FULL,
+      currentKm: 34200,
       color: "Blanco",
       image: "http://bay2car.com/img/2016-SEAT-Ibiza-1-0-EcoTSI-SE-3dr-Petrol-white-Manual-262911897981/2.jpg"
     },
@@ -24,6 +25,7 @@ export class CarService {
       category: CarCategory.C,
       fuelType: "Diesel",
       fuelIndicator: FuelQuantity.THREE_QUARTS,
+      currentKm: 64200,
       color: "Plata",
       image: "https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/lGgAAOSwHnFVmPIV/$_86.JPG"
     },
@@ -33,6 +35,7 @@ export class CarService {
       category: CarCategory.A,
       fuelType: "Diesel",
       fuelIndicator: FuelQuantity.THREE_QUARTS,
+      currentKm: 3400,
       color: "Plata",
       image: "https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/lGgAAOSwHnFVmPIV/$_86.JPG"
     });
@@ -62,6 +65,7 @@ export class Car {
   public category: CarCategory;
   public fuelType;
   public fuelIndicator: FuelQuantity;
+  public currentKm: number;
   public image?;
   public client?: Client;
 }

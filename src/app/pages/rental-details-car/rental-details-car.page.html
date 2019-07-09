@@ -29,29 +29,28 @@
       </ion-list> 
       </div>
       <div *ngIf="selectedCar">
-        <ion-item lines="none">
-            <ion-label color="primary">Coche Selecionado</ion-label> 
-            <ion-buttons slot="end">
-                <ion-button (click)="onClick()" fill="clear" color="primary">
-                 <ion-icon slot="icon-only" name="create"></ion-icon>
-                </ion-button>
-            </ion-buttons>
-        </ion-item>
         <ion-card>
           <ion-card-header color="primary">
             <ion-card-subtitle>{{ selectedCar.modelName }}</ion-card-subtitle>
-            <ion-card-subtitle>{{ selectedCar.registration }}</ion-card-subtitle>
+            <ion-card-title>{{ selectedCar.registration }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
+            <ion-icon slot="start" src="assets/icon/odometer.svg"></ion-icon>
+            <ion-label slot="end" class="ion-padding-start ion-padding-top">{{ selectedCar.currentKm }} Km</ion-label>
             <ion-range class="ion-no-padding" min="0" max="100" pin="true" snaps="true" step="25" ticks="true" [value]="selectedCar.fuelIndicator">
-              <ion-icon src="assets/icon/icon_fuel_3.svg" slot="start"></ion-icon>
-              <ion-icon src="assets/icon/icon_fuel_4.svg" slot="end"></ion-icon>
+              <ion-icon src="assets/icon/icon_fuel_3.svg" slot="start" size="small"></ion-icon>
+              <ion-icon src="assets/icon/icon_fuel_4.svg" slot="end" size="small"></ion-icon>
             </ion-range>
             <img [src]="selectedCar.image" size="small" />
+            <ion-select [(ngModel)]="selectedAccessories" (ionChange)="selectedAcessories($event)" class="ion-padding-top"
+                        multiple="true" placeholder="Acesórios" selectedText="Acesórios Selecionados" detail="false">
+              <ion-select-option value="GPS">GPS</ion-select-option>
+              <ion-select-option value="BABY_SEAT">Sila bebe</ion-select-option>
+            </ion-select>
             <ion-text color="medium" slot="end">
-              <ul>
-                <li>Km: 13.230</li>
-              </ul>
+                <ul>
+                  <li *ngFor="let aces of acessories">{{aces}}</li>
+                </ul>
             </ion-text>
           </ion-card-content>
         </ion-card>
