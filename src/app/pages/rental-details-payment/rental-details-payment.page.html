@@ -8,27 +8,40 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card>
+  <ion-card>
     <ion-item lines="none">
       <ion-avatar slot="start">
         <img src="/assets/icon/avatar.svg" />
       </ion-avatar>
       <ion-label color="medium">
-        <h4>{{rental.client.name}}</h4>
+        <h4>{{currentRental.client.name}}</h4>
         <p>Additional client details</p>
       </ion-label>
     </ion-item>
   </ion-card>
-  <ion-card>
+  <ion-card color="success">
       <ion-item lines="none">
         <ion-avatar slot="start">
-          <img [src]="rental.car.image" />
+          <img [src]="currentRental.car.image" />
         </ion-avatar>
         <ion-label color="medium">
-          <h4>{{rental.car.registration }} - {{rental.car.modelName}}</h4>
+          <h4>{{currentRental.car.registration }} - {{currentRental.car.modelName}}</h4>
           <p>Additional car details like damage, km...</p>
         </ion-label>
       </ion-item>
-  </ion-card> -->
-  
+  </ion-card>
+  <ion-card color="success">
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="/assets/icon/calendar.svg" />
+        </ion-avatar>
+        <ion-label color="medium">
+          <h4>{{currentRental.pickupDate | date:'dd/MM/yyyy'}} - {{currentRental.returnDate | date:'dd/MM/yyyy'}}</h4>
+          <p>Diarias Totais: {{dateDifference()}}</p>
+        </ion-label>
+      </ion-item>
+  </ion-card>
+  <ion-card color="success">
+    
+  </ion-card>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Rental, RentalService } from 'src/app/services/rental.service';
+import { RentalService, Rental } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-rental-details-payment',
@@ -8,13 +8,18 @@ import { Rental, RentalService } from 'src/app/services/rental.service';
 })
 export class RentalDetailsPaymentPage implements OnInit {
 
-  rental: Rental;
+  currentRental: Rental;
+
   constructor(private rentalService: RentalService) { 
-    this.rental = this.rentalService.currentRental();
-    console.log(this.rental);
   }
 
   ngOnInit() {
+    this.currentRental = this.rentalService.currentRental();
   }
+
+  dateDifference() {
+    let diff = (this.currentRental.returnDate.valueOf() - this.currentRental.pickupDate.valueOf()) / (24 * 3600 * 1000);
+    return Math.ceil(diff);
+}
 
 }
