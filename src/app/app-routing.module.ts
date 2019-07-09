@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'add-rental-modal', loadChildren: './modal/add-rental-modal/add-rental-modal.module#AddRentalModalPageModule' },
   { path: 'available-cars-modal', loadChildren: './modal/available-cars-modal/available-cars-modal.module#AvailableCarsModalPageModule' },
   { path: 'rental-details', loadChildren: './pages/rental-details/rental-details.module#RentalDetailsPageModule' },
-  { path: 'rental-details-payment', loadChildren: './pages/rental-details-payment/rental-details-payment.module#RentalDetailsPaymentPageModule' },  { path: 'rental-details-car', loadChildren: './pages/rental-details-car/rental-details-car.module#RentalDetailsCarPageModule' }
+  { path: 'rental-details-payment', loadChildren: './pages/rental-details-payment/rental-details-payment.module#RentalDetailsPaymentPageModule' },  { path: 'rental-details-car', loadChildren: './pages/rental-details-car/rental-details-car.module#RentalDetailsCarPageModule' },
+  { path: 'rental-details-insurance-extras', loadChildren: './pages/rental-details-insurance-extras/rental-details-insurance-extras.module#RentalDetailsInsuranceExtrasPageModule' }
 
 
 ];
