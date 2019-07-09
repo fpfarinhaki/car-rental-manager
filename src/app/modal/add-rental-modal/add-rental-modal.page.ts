@@ -3,6 +3,7 @@ import { ClientService, Client } from 'src/app/services/client.service';
 import { ModalController } from '@ionic/angular';
 import { AddClientModalPage } from '../add-client-modal/add-client-modal.page';
 import { RentalService } from 'src/app/services/rental.service';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-add-rental-modal',
@@ -10,6 +11,8 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./add-rental-modal.page.scss'],
 })
 export class AddRentalModalPage implements OnInit {
+
+  @ViewChild('inputName') inputName;
 
   clients: Client[] = [];
   clientName = '';
@@ -19,7 +22,8 @@ export class AddRentalModalPage implements OnInit {
   
   constructor(private clientService: ClientService,
               private rentalService: RentalService,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private keyboard: Keyboard) {
   }
 
   ngOnInit() {
@@ -47,10 +51,13 @@ export class AddRentalModalPage implements OnInit {
     }
   }
 
-  private clearForm() {
+  clearForm() {
     this.clients = [];
     this.clientNotFound = false;
     this.selectedClient = null;
+    this.clientName = '';
+    this.inputName.setFocus();
+    this.keyboard.show();
   }
 
   addClient() {

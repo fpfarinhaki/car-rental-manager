@@ -11,8 +11,8 @@
           <ion-button (click)="addClient()" *ngIf="clientNotFound" fill="clear" color="primary">
             <ion-icon name="person-add"></ion-icon>
           </ion-button>
-          <ion-button (click)="searchClient($event)" *ngIf="selectedClient" fill="clear" color="primary">
-            <ion-icon name="search"></ion-icon>
+          <ion-button (click)="clearForm()" *ngIf="selectedClient" fill="clear" color="primary">
+            <ion-icon name="search" size="small"></ion-icon>
           </ion-button>
         </ion-buttons>
         <ion-input #inputName [(ngModel)]="clientName" (ionInput)="searchClient($event)"

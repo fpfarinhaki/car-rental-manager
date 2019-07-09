@@ -14,6 +14,7 @@ import { AddCarModalPageModule } from './modal/add-car-modal/add-car-modal.modul
 import { HttpClientModule } from '@angular/common/http'
 import { AddRentalModalPageModule } from './modal/add-rental-modal/add-rental-modal.module';
 import { AvailableCarsModalPageModule } from './modal/available-cars-modal/available-cars-modal.module';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AvailableCarsModalPageModule } from './modal/available-cars-modal/avail
   providers: [
     StatusBar,
     SplashScreen,
+    Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
