@@ -16,7 +16,7 @@
           </ion-button>
         </ion-buttons>
         <ion-input #inputName [(ngModel)]="clientName" (ionInput)="searchClient($event)"
-            placeholder="Nombre completo" [debounce]="350">
+            placeholder="Nombre completo" [debounce]="350" autocapitalize="words">
         </ion-input>
       </ion-item>
       <div *ngIf="clients.length > 0">
