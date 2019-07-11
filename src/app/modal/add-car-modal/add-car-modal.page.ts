@@ -39,6 +39,7 @@ export class AddCarModalPage implements OnInit {
       color: value['color'],
       category: value['category'],
       fuelType: value['fuelType'], 
+      currentKm: 0,
       fuelIndicator: FuelQuantity.HALF
     }
     console.log(car);
