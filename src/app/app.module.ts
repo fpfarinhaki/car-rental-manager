@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AddRentalModalPageModule } from './modal/add-rental-modal/add-rental-modal.module';
 import { AvailableCarsModalPageModule } from './modal/available-cars-modal/available-cars-modal.module';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     StatusBar,
     SplashScreen,
     Keyboard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+    OpenStreetMapProvider
   ],
   bootstrap: [AppComponent]
 })
