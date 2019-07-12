@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <!-- Client Card -->
   <ion-card>
     <ion-item lines="none">
       <ion-avatar slot="start">
@@ -15,22 +16,70 @@
       </ion-avatar>
       <ion-label color="medium">
         <h4>{{currentRental.client.name}}</h4>
-        <p>Additional client details</p>
+        <p>Validad permiso: {{currentRental.client.driverLicenseExpirationDate}}</p>
       </ion-label>
+      <ion-button color="medium" *ngIf="!showClientDetails" (click)="clientDetails()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-dropdown"></ion-icon>
+      </ion-button>
+      <ion-button color="medium" *ngIf="showClientDetails" (click)="clientDetails()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-dropup"></ion-icon>
+      </ion-button>
     </ion-item>
+    <ion-card-content *ngIf="showClientDetails">
+        <ion-item-group class="ion-no-margin">
+            <ion-item-divider color="light">
+              <ion-label color="medium">Identificación</ion-label>
+            </ion-item-divider>
+            <ion-item lines="none">
+              <ion-label>
+                <ion-text color="medium">
+                  <p>{{ currentRental.client.idNumber }} - {{ currentRental.client.idType }}</p>
+                  <p>{{ currentRental.client.idExpirationDate }}</p>
+                  <p>{{ currentRental.client.idCountry}}</p>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+            <ion-item-divider color="light">
+              <ion-label color="medium">Permiso</ion-label>
+            </ion-item-divider>
+            <ion-item lines="none">
+              <ion-label>
+                <ion-text color="medium">
+                  <p>{{currentRental.client.driverLicenseNumber}}</p>
+                  <p>{{currentRental.client.driverLicenseExpirationDate}}</p>
+                  <p>{{currentRental.client.driverLicenseCountry}}</p>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-item-group>
+    </ion-card-content>
   </ion-card>
-  <ion-card color="success">
+  <!-- Car Card -->
+  <ion-card>
       <ion-item lines="none">
         <ion-avatar slot="start">
           <img [src]="currentRental.car.image" />
         </ion-avatar>
         <ion-label color="medium">
           <h4>{{currentRental.car.registration }} - {{currentRental.car.modelName}}</h4>
-          <p>Additional car details like damage, km...</p>
+          <p><ion-icon slot="start" src="assets/icon/odometer.svg" class="ion-padding-end"></ion-icon>{{currentRental.car.currentKm}} Km</p>
         </ion-label>
+        <ion-button color="medium" *ngIf="!showCarDetails" (click)="carDetails()" fill="clear">
+          <ion-icon slot="icon-only" name="arrow-dropdown"></ion-icon>
+        </ion-button>
+        <ion-button color="medium" *ngIf="showCarDetails" (click)="carDetails()" fill="clear">
+          <ion-icon slot="icon-only" name="arrow-dropup"></ion-icon>
+        </ion-button>
       </ion-item>
+      <ion-card-content *ngIf="showCarDetails">
+        <ion-chip *ngFor="let aces of currentRental.accessories; index as i" color="success" mode="ios">
+          <ion-icon name="checkmark"></ion-icon>
+          <ion-label>{{aces}}</ion-label>
+        </ion-chip> 
+      </ion-card-content>
   </ion-card>
-  <ion-card color="success">
+  <!-- Dates Card -->
+  <ion-card>
       <ion-item lines="none">
         <ion-avatar slot="start">
           <img src="/assets/icon/calendar.svg" />
@@ -39,9 +88,45 @@
           <h4>{{currentRental.pickupDate | date:'dd/MM/yyyy'}} - {{currentRental.returnDate | date:'dd/MM/yyyy'}}</h4>
           <p>Diarias Totais: {{dateDifference()}}</p>
         </ion-label>
+        <ion-button color="medium" *ngIf="!showDateDetails" (click)="dateDetails()" fill="clear">
+          <ion-icon slot="icon-only" name="arrow-dropdown"></ion-icon>
+        </ion-button>
+        <ion-button color="medium" *ngIf="showDateDetails" (click)="dateDetails()" fill="clear">
+          <ion-icon slot="icon-only" name="arrow-dropup"></ion-icon>
+        </ion-button>
       </ion-item>
+      <ion-card-content *ngIf="showDateDetails">
+        <ion-chip *ngFor="let aces of currentRental.accessories; index as i" color="success" mode="ios">
+          <ion-icon name="checkmark"></ion-icon>
+          <ion-label>{{aces}}</ion-label>
+        </ion-chip> 
+      </ion-card-content>
   </ion-card>
-  <ion-card color="success">
-    
+  <!-- Addons Card -->
+  <ion-card>
+    <ion-item>
+      <ion-label color="primary">Adicionais</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Sup. Menor de 23</ion-label>
+        <ion-checkbox [(ngModel)]="currentRental.under23" slot="start" color="success" mode="ios"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Seguro</ion-label>
+        <ion-checkbox [(ngModel)]="currentRental.insurance" slot="start" color="success" mode="ios"></ion-checkbox>
+      </ion-item>
+    </ion-card-content>  
   </ion-card>
+
+  <!-- Buttons block -->
+  <ion-button routerLink="/rental-details-payment" routerDirection="forward" 
+              color="success" expand="block">
+    Confirmar
+  </ion-button>
+  <ion-button routerLink="/rentals" routerDirection="root" color="danger" expand="block">
+    Cancelar
+  </ion-button>
+  
+  
 </ion-content>

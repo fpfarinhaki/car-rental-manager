@@ -60,6 +60,8 @@ export class Rental {
   returnDate?: Date;
   pickupLocation?: string;
   accessories?: CarAcessories[];
+  insurance?: boolean;
+  under23?: boolean;
 }
 
 export enum CarAcessories {
