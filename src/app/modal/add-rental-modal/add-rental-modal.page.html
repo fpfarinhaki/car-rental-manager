@@ -33,7 +33,7 @@
   <ion-card>
       <ion-card-header color="primary">
         <ion-card-subtitle *ngIf="selectedClient">{{ selectedClient.name }}</ion-card-subtitle>
-        <ion-skeleton-text *ngIf="!selectedClient" width="40%"></ion-skeleton-text>  
+        <ion-skeleton-text *ngIf="!selectedClient" width="40%"></ion-skeleton-text>
       </ion-card-header>
       <ion-card-content *ngIf="!selectedClient">
           <ion-item-group class="ion-no-margin">
