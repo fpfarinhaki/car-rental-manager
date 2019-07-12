@@ -35,23 +35,23 @@
             <ion-card-title>{{ selectedCar.registration }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-icon slot="start" src="assets/icon/odometer.svg"></ion-icon>
+            <ion-icon slot="start" src="assets/icon/odometer.svg" class="ion-padding-top"></ion-icon>
             <ion-label slot="end" class="ion-padding-start ion-padding-top">{{ selectedCar.currentKm }} Km</ion-label>
             <ion-range class="ion-no-padding" min="0" max="100" pin="true" snaps="true" step="25" ticks="true" [value]="selectedCar.fuelIndicator">
               <ion-icon src="assets/icon/icon_fuel_3.svg" slot="start" size="small"></ion-icon>
               <ion-icon src="assets/icon/icon_fuel_4.svg" slot="end" size="small"></ion-icon>
             </ion-range>
             <img [src]="selectedCar.image" size="small" />
-            <ion-select [(ngModel)]="selectedAccessories" (ionChange)="selectedAcessories($event)" class="ion-padding-top"
+            <ion-select [(ngModel)]="selectedAccessories" class="ion-padding-top"
                         multiple="true" placeholder="Acesórios" selectedText="Acesórios Selecionados" detail="false">
-              <ion-select-option value="GPS">GPS</ion-select-option>
-              <ion-select-option value="BABY_SEAT">Sila bebe</ion-select-option>
+              <ion-select-option *ngFor="let availableAcessory of availableAcessories()"
+                            [value]="availableAcessory">{{availableAcessory}}
+              </ion-select-option>
             </ion-select>
-            <ion-text color="medium" slot="end">
-                <ul>
-                  <li *ngFor="let aces of acessories">{{aces}}</li>
-                </ul>
-            </ion-text>
+            <ion-chip *ngFor="let aces of selectedAccessories; index as i" color="primary" mode="ios" outline="true">
+              <ion-label>{{aces}}</ion-label>
+              <ion-icon name="close-circle" button (click)="removeAcessory(i)"></ion-icon>
+            </ion-chip> 
           </ion-card-content>
         </ion-card>
       </div>

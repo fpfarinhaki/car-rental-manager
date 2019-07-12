@@ -14,7 +14,6 @@ export class RentalDetailsCarPage implements OnInit {
 
   selectedCar: Car;
   selectedAccessories: CarAcessories[];
-  acessories = [];
   availableCars = [];
   availableCategoryA = [];
   availableCategoryB = [];
@@ -29,7 +28,7 @@ export class RentalDetailsCarPage implements OnInit {
     this.availableCategoryC = this.availableCars.filter((car) => car.category === CarCategory.C);
   }
 
-  ngOnInit() {
+  ngOnInit() {  
   }
 
   ionViewDidLeave() {
@@ -48,8 +47,12 @@ export class RentalDetailsCarPage implements OnInit {
     return await modal.present();
   }
 
-  selectedAcessories() {
-    this.acessories = this.selectedAccessories.map(aces => CarAcessories[aces]);  
+  availableAcessories() {
+    return Object.values(CarAcessories);
+  }
+
+  removeAcessory(itemIndex) {
+    this.selectedAccessories.splice(itemIndex, 1);
   }
 
 }
