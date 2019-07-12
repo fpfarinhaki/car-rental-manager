@@ -75,4 +75,8 @@ export class AddClientModalPage implements OnInit {
     //Empty countries list to close virtual scroll
     this.countries = [];
   }
+
+  segmentChanged() {
+    console.log("Still not implemented");
+  }
 }
