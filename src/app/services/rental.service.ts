@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Client } from './client.service';
 import { Car } from './car.service';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class RentalService {
   constructor() {}
 
   getRentals() {
-    return this.rentals;
+    return of(this.rentals);
   }
 
   addRental(rental: Rental) {
@@ -22,6 +23,7 @@ export class RentalService {
 
   confirmRental() {
     this.addRental(this._rental);
+    console.log(this.rentals);
   }
 
   aRental() {

@@ -7,20 +7,22 @@
 </ion-header>
 
 <ion-content>
+    <ion-searchbar placeholder="Busca alquiler" [debounce]="250"></ion-searchbar>
     <ion-list>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>05-Mar - 10-Mar 18:30</ion-card-subtitle>
-          <ion-card-title>Seat Ibiza - AXN 09092</ion-card-title>
-          <ion-card-content>
-            Informacion del alquiler
-            *cliente, combustivel...
-          </ion-card-content>
-        </ion-card-header>
-      </ion-card>
+      <ion-item *ngFor="let rental of rentals" button detail="false">
+        <ion-avatar slot="start">
+          <ion-img [src]="rental.car.image"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h4>Retirada: {{rental.pickupDate | date:'EEE, dd/MMM - HH:mm'}} </h4>
+          <h4>Devolución: {{rental.returnDate |date:'EEE, dd/MMM - HH:mm'}}</h4>
+          <h4>{{rental.car.registration }} - {{rental.car.modelName}}</h4>
+          <h4>{{rental.client.name }}</h4>
+        </ion-label>
+      </ion-item>
     </ion-list>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button vertical routerLink="/add-rental-modal" routerDirection="forward">
+      <ion-fab-button vertical (click)="cleanRental()" routerLink="/add-rental-modal" routerDirection="forward">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
