@@ -41,14 +41,17 @@ export class RentalDetailsPaymentPage implements OnInit {
   }
 
   confirmRental() {
-    this.rentalService.addRental
+    this.rentalService.confirmRental();
     this.toastController.create({
       message: "Alquiler registrado con sucesso",
       duration: 650,
       translucent: false, 
       animated: true,
       position: "top"
-    }).then(toast => toast.present());
+    }).then(toast => {
+        setTimeout(() => {
+          toast.present();
+        }, 650); 
+      });
   }
-
 }
