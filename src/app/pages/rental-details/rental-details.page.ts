@@ -17,7 +17,9 @@ export class RentalDetailsPage implements OnInit {
 
   now: string;
   pickupDate: string;
+  pickupLocation: string;
   returnDate: string;
+  returnLocation: string;
   minDate: string = new Date().toISOString();
   autocompleteItems = [];
   
@@ -29,6 +31,7 @@ export class RentalDetailsPage implements OnInit {
     console.log(this.returnDate);
     this.rentalService.withPickupDate(new Date(this.pickupDate));
     this.rentalService.withReturnDate(new Date(this.returnDate));
+    this.rentalService.withPickupLocation(this.pickupLocation);
   }
 
   ngOnInit() {
@@ -36,7 +39,7 @@ export class RentalDetailsPage implements OnInit {
     this.minDate = new Date().toISOString();
   }
 
-  updateSearch(event) {
+  searchAddress(event) {
     let keyword = event.srcElement.value;
     if (keyword == '') {
       this.autocompleteItems = [];
@@ -46,6 +49,12 @@ export class RentalDetailsPage implements OnInit {
         query: keyword
       }).then(result => this.autocompleteItems = result);
     }
+  }
+
+  chooseAddress(address) {
+    console.log(address);
+    this.autocompleteItems = [];
+    this.pickupLocation = address.label;
   }
 
 }

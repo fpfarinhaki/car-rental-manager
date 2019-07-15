@@ -16,12 +16,12 @@
     </ion-datetime>
     <ion-icon slot="end" name="calendar"></ion-icon>
   </ion-item>
-  <ion-searchbar placeholder="Local Salida" (ionInput)="updateSearch($event)" [debounce]="550"></ion-searchbar>
+  <ion-searchbar searchIcon="pin" placeholder="Local Salida" (ionInput)="searchAddress($event)" [debounce]="550"></ion-searchbar>
   <ion-card *ngIf="autocompleteItems.length > 0" class="ion-padding-bottom">
-    <ion-card-content>
+    <ion-card-content class="ion-no-padding">
         <ion-list>
             <ion-item *ngFor="let item of autocompleteItems" 
-                tappable (click)="chooseItem(item)" class="address-search-item ion-no-padding">
+                tappable (click)="chooseAddress(item)" class="address-search-item ion-no-padding">
               <ion-icon slot="start" name="pin" color="medium"></ion-icon>
               <ion-label>{{item.label}}</ion-label>
             </ion-item>
@@ -35,10 +35,7 @@
     </ion-datetime>
     <ion-icon slot="end" name="calendar"></ion-icon>
   </ion-item>
-  <ion-item>
-    <ion-input type="search" placeholder="Local Devolución"></ion-input>
-    <ion-icon slot="end" name="pin"></ion-icon>
-  </ion-item>
+  <ion-searchbar searchIcon="pin" placeholder="Local Salida" [debounce]="550"></ion-searchbar>
   <ion-button routerLink="/rental-details-payment" routerDirection="forward" 
               color="success" expand="block" [disabled]="!pickupDate || !returnDate">
     Proximo

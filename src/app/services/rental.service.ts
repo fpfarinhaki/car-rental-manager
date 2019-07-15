@@ -38,6 +38,10 @@ export class RentalService {
     this._rental.pickupDate = pickupDate;
   }
 
+  withPickupLocation(pickupLocation: string) {
+    this._rental.pickupLocation = pickupLocation;
+  }
+
   withReturnDate(returnDate: Date) {
     this._rental.returnDate = returnDate;
   }
