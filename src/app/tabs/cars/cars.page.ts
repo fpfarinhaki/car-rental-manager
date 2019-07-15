@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CarService } from '../services/car.service';
+import { CarService } from '../../services/car.service';
 import { ModalController } from '@ionic/angular';
-import { AddCarModalPage } from '../modal/add-car-modal/add-car-modal.page';
+import { AddCarModalPage } from '../../modal/add-car-modal/add-car-modal.page';
 
 @Component({
   selector: 'app-cars',

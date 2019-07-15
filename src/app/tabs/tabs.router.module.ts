@@ -12,7 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../rentals/rentals.module#RentalsPageModule'
+            loadChildren: './rentals/rentals.module#RentalsPageModule'
           }
         ]
       },
@@ -21,7 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../cars/cars.module#CarsPageModule'
+            loadChildren: './cars/cars.module#CarsPageModule'
           }
         ]
       },
@@ -30,7 +30,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../clients/clients.module#ClientsPageModule'
+            loadChildren: './clients/clients.module#ClientsPageModule'
           }
         ]
       },

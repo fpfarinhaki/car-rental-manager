@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RentalService } from '../services/rental.service';
+import { RentalService } from '../../services/rental.service';
 
 @Component({
   selector: 'app-rentals',

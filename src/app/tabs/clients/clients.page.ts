@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ClientService, Client } from '../services/client.service';
-import { AddClientModalPage } from '../modal/add-client-modal/add-client-modal.page';
+import { ClientService, Client } from '../../services/client.service';
+import { AddClientModalPage } from '../../modal/add-client-modal/add-client-modal.page';
 import { ModalController } from '@ionic/angular';
 
 @Component({
