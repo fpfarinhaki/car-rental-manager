@@ -20,6 +20,10 @@ export class RentalService {
     this.rentals.push(rental);
   }
 
+  confirmRental() {
+    this.addRental(this._rental);
+  }
+
   aRental() {
     this._rental = new Rental();
     this._rental.contractNumber = '123534353';

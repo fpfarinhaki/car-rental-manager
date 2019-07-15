@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RentalService, Rental } from 'src/app/services/rental.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rental-details-payment',
@@ -13,7 +14,8 @@ export class RentalDetailsPaymentPage implements OnInit {
   showClientDetails: boolean = false;
   showDateDetails: boolean = false;
 
-  constructor(private rentalService: RentalService) { 
+  constructor(private rentalService: RentalService,
+              private toastController: ToastController) { 
   }
 
   ngOnInit() {
@@ -38,6 +40,15 @@ export class RentalDetailsPaymentPage implements OnInit {
     this.showDateDetails = !this.showDateDetails;
   }
 
-
+  confirmRental() {
+    this.rentalService.addRental
+    this.toastController.create({
+      message: "Alquiler registrado con sucesso",
+      duration: 650,
+      translucent: false, 
+      animated: true,
+      position: "top"
+    }).then(toast => toast.present());
+  }
 
 }

@@ -72,6 +72,7 @@
         </ion-button>
       </ion-item>
       <ion-card-content *ngIf="showCarDetails">
+        <ion-label color="medium" *ngIf="currentRental.accessories">Ningun acesorio seleccionado</ion-label>
         <ion-chip *ngFor="let aces of currentRental.accessories; index as i" color="success" mode="ios">
           <ion-icon name="checkmark"></ion-icon>
           <ion-label>{{aces}}</ion-label>
@@ -96,10 +97,8 @@
         </ion-button>
       </ion-item>
       <ion-card-content *ngIf="showDateDetails">
-        <ion-chip *ngFor="let aces of currentRental.accessories; index as i" color="success" mode="ios">
-          <ion-icon name="checkmark"></ion-icon>
-          <ion-label>{{aces}}</ion-label>
-        </ion-chip> 
+        <ion-icon slot="start" name="pin"></ion-icon>
+        <ion-label>Local de entrega: {{currentRental.pickupLocation}}</ion-label>
       </ion-card-content>
   </ion-card>
   <!-- Addons Card -->
@@ -120,8 +119,8 @@
   </ion-card>
 
   <!-- Buttons block -->
-  <ion-button routerLink="/rental-details-payment" routerDirection="forward" 
-              color="success" expand="block">
+  <ion-button (click)="confirmRental()" routerLink="/rentals" routerDirection="root" 
+        color="success" expand="block">
     Confirmar
   </ion-button>
   <ion-button routerLink="/rentals" routerDirection="root" color="danger" expand="block">
