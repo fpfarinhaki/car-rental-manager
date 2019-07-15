@@ -1,39 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title color="primary">Incluir Alquiler</ion-title>
+    <ion-title color="primary">Cliente</ion-title>
+    <ion-button (click)="addClient()" *ngIf="clientNotFound" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="person-add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-      <ion-item lines="none">
-        <ion-label color="primary" slot="start">Cliente</ion-label>
-        <ion-buttons slot="end">
-          <ion-button (click)="addClient()" *ngIf="clientNotFound" fill="clear" color="primary">
-            <ion-icon name="person-add"></ion-icon>
-          </ion-button>
-          <ion-button (click)="clearForm()" *ngIf="selectedClient" fill="clear" color="primary">
-            <ion-icon name="search" size="small"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-input #inputName [(ngModel)]="clientName" (ionInput)="searchClient($event)"
-            placeholder="Nombre completo" [debounce]="350" autocapitalize="words">
-        </ion-input>
-      </ion-item>
+  <ion-searchbar #inputName placeholder="Nombre completo" [debounce]="350"
+    (ionInput)="searchClient($event)" (ionClear)="clearForm()">
+  </ion-searchbar>
       <div *ngIf="clients.length > 0">
         <ion-list>
           <ion-item button *ngFor="let client of clients" (click)="selectClient(client)">
+            <ion-icon slot="start" name="person"></ion-icon>
             <ion-label>{{ client.name }}</ion-label>
           </ion-item>
         </ion-list>
       </div>
       <ion-label *ngIf="clientNotFound && !searchingClient" color="danger">
-        <ion-icon name="information"></ion-icon>
+        <ion-icon name="information-circle"></ion-icon>
         Cliente no encontrado
       </ion-label>
   <ion-card>
       <ion-card-header color="primary">
         <ion-card-subtitle *ngIf="selectedClient">{{ selectedClient.name }}</ion-card-subtitle>
-        <ion-skeleton-text *ngIf="!selectedClient" width="40%"></ion-skeleton-text>
       </ion-card-header>
       <ion-card-content *ngIf="!selectedClient">
           <ion-item-group class="ion-no-margin">
@@ -43,9 +34,9 @@
             <ion-item lines="none">
               <ion-label>
                 <ion-text color="medium">
-                  <ion-skeleton-text width="80%" animated="true"></ion-skeleton-text>
-                  <ion-skeleton-text width="60%" animated="true"></ion-skeleton-text>
-                  <ion-skeleton-text width="40%" animated="true"></ion-skeleton-text>
+                  <ion-skeleton-text width="80%"></ion-skeleton-text>
+                  <ion-skeleton-text width="60%"></ion-skeleton-text>
+                  <ion-skeleton-text width="40%"></ion-skeleton-text>
                 </ion-text>
               </ion-label>
             </ion-item>
@@ -55,9 +46,9 @@
             <ion-item lines="none">
               <ion-label>
                 <ion-text color="medium">
-                    <ion-skeleton-text width="70%" animated="true"></ion-skeleton-text>
-                    <ion-skeleton-text width="60%" animated="true"></ion-skeleton-text>
-                    <ion-skeleton-text width="40%" animated="true"></ion-skeleton-text>
+                    <ion-skeleton-text width="70%"></ion-skeleton-text>
+                    <ion-skeleton-text width="60%"></ion-skeleton-text>
+                    <ion-skeleton-text width="40%"></ion-skeleton-text>
                 </ion-text>
               </ion-label>
             </ion-item>
